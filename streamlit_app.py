@@ -36,7 +36,7 @@ def handle_history():
 def handle_clear_chat():
     st.session_state.response = None
     st.session_state.chat_history = None
-    st.session_state.conversation.memory.clear()
+    # st.session_state.conversation.memory.clear()
     
     
 
