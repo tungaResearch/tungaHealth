@@ -48,7 +48,7 @@ def main():
 
     # loaded_pdfs = [os.path.join(UPLOAD_DIRECTORY, fname) for fname in os.listdir(UPLOAD_DIRECTORY)]
     load_dotenv()
-    st.set_page_config(page_title="TungaHealth - Medical Drugs Info Retriever", page_icon=":books")
+    st.set_page_config(page_title="TungaHealth")
     
     st.write(css, unsafe_allow_html=True)
     if "conversation" not in st.session_state:
@@ -66,32 +66,7 @@ def main():
     st.image('tunga_logo_v2-removebg-preview.png', width=300)
     st.header("TungaHealth RAG Model")
     st.subheader("Dosage Information Retriever")
-
-    user_question = st.text_input("Which medical drug dosage would you like to retrieve?")
-    if st.button('Clear chat'):
-        user_question = ''
-        handle_clear_chat()
-
-    if user_question:
-        handle_user_question(user_question)
-        # try:
-        #     handle_user_question(user_question)
-        # except:
-        #     st.warning("Please upload and process KNMF", icon='⚠️')
-    elif user_question == '':
-        handle_history()  
-    # st.subheader("Kenya National Medical Formulary")
-    # if st.checkbox("Manage Collections"):
-    #     st.header("Manage Proposal Documents")
-    #     collections = ["Collection 1", "Collection 2"]  # Define your collections
-    #     for collection in collections:
-    #         with st.expander(f"Manage {collection}"):
-    #             create_folder_button = st.button(f"Create {collection} Folder", key=f"create_{collection}")
-    #             if create_folder_button:
-    #                 create_folder(collection)
-    #             upload_files(collection)
-
-    # pdf_docs = st.file_uploader("Upload KNMF Here and Click Process", accept_multiple_files=True)
+    
     pdf_docs = ['Kenya_National_Medicines_Formulary_2023_1st_Edition.pdf']
     
     if st.button('Initialize'):
@@ -142,6 +117,32 @@ def main():
             )
                     # st.write('response',st.session_state.embeddings_meta_df)
         st.success("Agent initialized successfully")        
+    user_question = st.text_input("Which medical drug dosage would you like to retrieve?")
+    if st.button('Clear chat'):
+        user_question = ''
+        handle_clear_chat()
+
+    if user_question:
+        handle_user_question(user_question)
+        # try:
+        #     handle_user_question(user_question)
+        # except:
+        #     st.warning("Please upload and process KNMF", icon='⚠️')
+    elif user_question == '':
+        handle_history()  
+    # st.subheader("Kenya National Medical Formulary")
+    # if st.checkbox("Manage Collections"):
+    #     st.header("Manage Proposal Documents")
+    #     collections = ["Collection 1", "Collection 2"]  # Define your collections
+    #     for collection in collections:
+    #         with st.expander(f"Manage {collection}"):
+    #             create_folder_button = st.button(f"Create {collection} Folder", key=f"create_{collection}")
+    #             if create_folder_button:
+    #                 create_folder(collection)
+    #             upload_files(collection)
+
+    # pdf_docs = st.file_uploader("Upload KNMF Here and Click Process", accept_multiple_files=True)
+    
         
                     
     # Function to embed query and compute distances
