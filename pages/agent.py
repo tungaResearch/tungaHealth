@@ -59,6 +59,8 @@ def main():
         st.session_state.response = None
     if "embeddings_meta_df" not in st.session_state:
         st.session_state.embeddings_meta_df = None
+    if "progress" not in st.session_state:
+        st.session_state.progress = None
     
     if "res" not in st.session_state:
         st.session_state.res = None
@@ -70,7 +72,8 @@ def main():
     pdf_docs = ['Kenya_National_Medicines_Formulary_2023_1st_Edition.pdf']
     
     if st.button('Initialize'):
-        st.write("Processing...")
+        st.session_state.progress = "Processing..."
+        st.write(st.session_state.progress)
         # save pdf files
         loaded_pdfs = file_converter(pdf_docs, UPLOAD_DIRECTORY)
         # get pdf text
@@ -116,18 +119,18 @@ def main():
                 }
             )
                     # st.write('response',st.session_state.embeddings_meta_df)
-        st.success("Agent initialized successfully")        
+        st.session_state.progress = "Agent initialized successfully"
+        st.success(st.session_state.progress)        
     user_question = st.text_input("Which medical drug dosage would you like to retrieve?")
     if st.button('Clear chat'):
         user_question = ''
         handle_clear_chat()
 
     if user_question:
-        handle_user_question(user_question)
-        # try:
-        #     handle_user_question(user_question)
-        # except:
-        #     st.warning("Please upload and process KNMF", icon='⚠️')
+        try:
+            handle_user_question(user_question)
+        except:
+            st.warning("Please initialize the agent", icon='⚠️')
     elif user_question == '':
         handle_history()  
     # st.subheader("Kenya National Medical Formulary")
