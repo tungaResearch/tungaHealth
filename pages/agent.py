@@ -41,14 +41,41 @@ def handle_clear_chat():
     
 
 def main():
+    load_dotenv()
+    st.set_page_config(page_title="TungaHealth")
+    # CSS to set the background image with reduced opacity
+    background_image_css = """
+    <style>
+    body {
+        background-image: url('images\symbol-of-kenya-national-emblem-PYEMX5-removebg-preview.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    body:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.5); /* White overlay with 50% opacity */
+        z-index: -1;
+    }
+    </style>
+    """
+    
+    # Inject the CSS into the Streamlit app
+    st.markdown(background_image_css, unsafe_allow_html=True)
     UPLOAD_DIRECTORY = 'docs/repository/'
 
     if not os.path.exists(UPLOAD_DIRECTORY):
         os.makedirs(UPLOAD_DIRECTORY)
 
     # loaded_pdfs = [os.path.join(UPLOAD_DIRECTORY, fname) for fname in os.listdir(UPLOAD_DIRECTORY)]
-    load_dotenv()
-    st.set_page_config(page_title="TungaHealth")
+    
     
     st.write(css, unsafe_allow_html=True)
     if "conversation" not in st.session_state:
@@ -65,7 +92,17 @@ def main():
     if "res" not in st.session_state:
         st.session_state.res = None
 
-    st.image('tunga_logo_v2-removebg-preview.png', width=300)
+    # Create two columns
+    col1, col2 = st.columns(2)
+
+    
+    with col1:
+        st.image('images/tunga_logo_v2-removebg-preview.png', width=200)
+
+    with col2:
+        st.image('images/symbol-of-kenya-national-emblem-PYEMX5-removebg-preview.png', width=150)
+        
+        
     st.header("TungaHealth RAG Model")
     st.subheader("Dosage Information Retriever")
     
