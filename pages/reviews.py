@@ -70,7 +70,7 @@ for i, (hospital, data) in enumerate(hospital_data.items(), start=1):
 fig.update_layout(
     title_text="Average Sentiment by Theme for Selected Hospitals",
     height=500,
-    width=1200,  # Increase width for better spacing
+    width=1000,  # Increase width for better spacing
     showlegend=False,
     yaxis=dict(title='Theme')
 )
