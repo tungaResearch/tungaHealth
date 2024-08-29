@@ -1,6 +1,8 @@
 .venv
+venv
 .env
 docs/*
 data/*
 __pycache__
-test.py 
+*categorized_drugs.csv
+test.py
