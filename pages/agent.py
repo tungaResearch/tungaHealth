@@ -69,7 +69,7 @@ def main():
     st.header("TungaHealth RAG Model")
     st.subheader("Dosage Information Retriever")
     
-    pdf_docs = ['Kenya_National_Medicines_Formulary_2023_1st_Edition.pdf']
+    pdf_docs = ['February_2007.pdf']
     
     if st.button('Initialize'):
         st.session_state.progress = "Processing..."
